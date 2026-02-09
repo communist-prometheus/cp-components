@@ -114,6 +114,40 @@ npm run test:watch
 npm run lint
 ```
 
+## Publishing
+
+The package is automatically published to GitHub Packages when a version tag `v*.*.*` is pushed.
+
+### Steps to create a release:
+
+1. **Update version** in `package.json`:
+   ```json
+   {
+     "version": "0.1.7"
+   }
+   ```
+
+2. **Commit changes**:
+   ```bash
+   git add package.json
+   git commit -m "chore: bump version to 0.1.7"
+   ```
+
+3. **Create and push tag**:
+   ```bash
+   git tag v0.1.7
+   git push origin main --tags
+   ```
+
+The GitHub Action will:
+- Run tests on Node.js 24.7
+- Build the package
+- Publish to GitHub Packages
+
+Check publication status:
+- [Actions tab](https://github.com/communist-prometheus/cp-components/actions)
+- [GitHub Packages](https://github.com/communist-prometheus/cp-components/pkgs/npm/cp-components)
+
 ## License
 
 MIT

@@ -1,6 +1,6 @@
 {
   "name": "@communist-prometheus/cp-components",
-  "version": "0.1.0",
+  "version": "0.1.6",
   "type": "module",
   "description": "Lit-based UI component library with reactive signals and design tokens",
   "main": "./dist/index.js",
