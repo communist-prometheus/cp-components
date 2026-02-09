@@ -1,6 +1,6 @@
 {
   "name": "@communist-prometheus/cp-components",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "description": "Lit-based UI component library with reactive signals and design tokens",
   "main": "./dist/index.js",
@@ -27,9 +27,6 @@
     "lint": "tsc --noEmit",
     "prepare": "npm run build"
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/communist-prometheus/cp-components.git"
@@ -44,6 +41,7 @@
   "author": "Communist Prometheus",
   "license": "MIT",
   "dependencies": {
+    "@communist-prometheus/cp-components": "communist-prometheus/cp-components",
     "lit": "^3.3.2"
   },
   "devDependencies": {
