@@ -17,6 +17,7 @@ jobs:
         with:
           node-version: 20
       - run: npm ci
+      - run: npx playwright install --with-deps
       - run: npm test
 
   publish-gpr:
