@@ -16,6 +16,14 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version: 20
+          cache: 'npm'
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            playwright-${{ runner.os }}-
       - run: npm ci
       - run: npx playwright install --with-deps
       - run: npm test
@@ -32,6 +40,7 @@ jobs:
         with:
           node-version: 20
           registry-url: https://npm.pkg.github.com/
+          cache: 'npm'
       - run: npm ci
       - run: npm publish
         env:
