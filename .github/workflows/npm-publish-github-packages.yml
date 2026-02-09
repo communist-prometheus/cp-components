@@ -23,7 +23,6 @@ jobs:
           key: playwright-${{ runner.os }}-${{ hashFiles('package.json') }}
           restore-keys: |
             playwright-${{ runner.os }}-
-      - run: rm -f package-lock.json
       - run: npm install
       - run: npx playwright install --with-deps
       - run: npm test
@@ -40,7 +39,6 @@ jobs:
         with:
           node-version: 24.7
           registry-url: https://npm.pkg.github.com/
-      - run: rm -f package-lock.json
       - run: npm install
       - run: npm publish
         env:
