@@ -7,7 +7,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 let CpButton = class CpButton extends LitElement {
-    static styles = css `
+    constructor() {
+        super(...arguments);
+        this.variant = 'primary';
+        this.size = 'md';
+        this.disabled = false;
+        this.type = 'button';
+        this.handleClick = (e) => {
+            if (this.disabled) {
+                e.preventDefault();
+                e.stopPropagation();
+                return;
+            }
+            this.dispatchEvent(new CustomEvent('cp-click', {
+                bubbles: true,
+                composed: true,
+                detail: { originalEvent: e },
+            }));
+        };
+    }
+    static { this.styles = css `
     :host {
       display: inline-block;
     }
@@ -68,23 +87,7 @@ let CpButton = class CpButton extends LitElement {
       padding: var(--cp-spacing-md, 1.5rem) var(--cp-spacing-lg, 2rem);
       font-size: 1.125rem;
     }
-  `;
-    variant = 'primary';
-    size = 'md';
-    disabled = false;
-    type = 'button';
-    handleClick = (e) => {
-        if (this.disabled) {
-            e.preventDefault();
-            e.stopPropagation();
-            return;
-        }
-        this.dispatchEvent(new CustomEvent('cp-click', {
-            bubbles: true,
-            composed: true,
-            detail: { originalEvent: e },
-        }));
-    };
+  `; }
     render() {
         return html `
       <button

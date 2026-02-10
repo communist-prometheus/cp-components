@@ -7,7 +7,31 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 let CpCard = class CpCard extends LitElement {
-    static styles = css `
+    constructor() {
+        super(...arguments);
+        this.hoverable = false;
+        this.elevated = false;
+        this.handleClick = (e) => {
+            if (!this.hoverable) {
+                return;
+            }
+            this.dispatchEvent(new CustomEvent('cp-card-click', {
+                bubbles: true,
+                composed: true,
+                detail: { originalEvent: e },
+            }));
+        };
+        this.handleKeydown = (e) => {
+            if (!this.hoverable) {
+                return;
+            }
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.handleClick(e);
+            }
+        };
+    }
+    static { this.styles = css `
     :host {
       display: block;
     }
@@ -32,19 +56,7 @@ let CpCard = class CpCard extends LitElement {
     .card.elevated.hoverable:hover {
       box-shadow: var(--cp-shadow-lg, 0 10px 15px -3px rgb(0 0 0 / 0.1));
     }
-  `;
-    hoverable = false;
-    elevated = false;
-    handleClick = (e) => {
-        if (!this.hoverable) {
-            return;
-        }
-        this.dispatchEvent(new CustomEvent('cp-card-click', {
-            bubbles: true,
-            composed: true,
-            detail: { originalEvent: e },
-        }));
-    };
+  `; }
     render() {
         const classes = [
             'card',
@@ -66,15 +78,6 @@ let CpCard = class CpCard extends LitElement {
       </div>
     `;
     }
-    handleKeydown = (e) => {
-        if (!this.hoverable) {
-            return;
-        }
-        if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            this.handleClick(e);
-        }
-    };
 };
 __decorate([
     property({ type: Boolean })
